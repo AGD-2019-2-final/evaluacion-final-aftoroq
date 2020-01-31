@@ -27,5 +27,7 @@ u = LOAD 'data.csv' USING PigStorage(',')
         quantity:INT);
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
---
+file = FOREACH u GENERATE firstname,color;
+file = FILTER file BY (color MATCHES '.*[aeiou]$.*');
+STORE file INTO 'output' USING PigStorage(',');
 
